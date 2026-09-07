@@ -1,0 +1,72 @@
+<view class="page">
+  <view class="header">
+    <view class="section-title">你的卡牌</view>
+    <view class="section-sub">关注方向：{{categoryNames}}</view>
+    <view class="section-sub" wx:if="{{question}}">问题：{{question}}</view>
+  </view>
+
+  <!-- 牌卡列表 -->
+  <view class="card" wx:for="{{cards}}" wx:key="id" wx:for-item="card">
+    <!-- 牌面（真实手绘插画） -->
+    <view class="card-face-wrap">
+      <image class="card-face-img {{card.upright ? '' : 'reversed'}}" src="{{card.image}}" mode="aspectFit"></image>
+      <view class="card-face-mark {{card.upright ? 'upright' : 'reversed'}}">{{card.upright ? '正位' : '逆位'}}</view>
+    </view>
+
+    <view class="card-info">
+      <view class="info-position" wx:if="{{cards.length > 1}}">{{card.positionName}} · {{card.upright ? '正位' : '逆位'}}</view>
+      <view class="info-position" wx:else>{{card.upright ? '正位' : '逆位'}}</view>
+
+      <view class="tag-row">
+        <text class="tag {{card.upright ? '' : 'tag-gold'}}" wx:for="{{card.keywords}}" wx:key="*this">{{item}}</text>
+      </view>
+
+      <view class="info-text">{{card.text}}</view>
+
+      <!-- 综合解读 -->
+      <view class="summary-box" wx:if="{{categories.length > 1}}">
+        <view class="summary-label">✦ 综合指引</view>
+        <view class="summary-text">{{card.combinedText}}</view>
+      </view>
+
+      <!-- 分维度指引 -->
+      <view class="love-box">
+        <view class="love-label">✦ 分维度详解</view>
+        <view class="dim-item" wx:for="{{categories}}" wx:key="*this" wx:for-item="cat">
+          <view class="dim-name">{{categoryNames[index]}}</view>
+          <view class="dim-text">{{card.dimensionTexts[cat]}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 综合总结卡片 -->
+  <view class="final-card">
+    <view class="final-title">{{finalTitle}}</view>
+    <view class="final-content">{{finalSummaryText}}</view>
+    <view class="btn-save" bindtap="onSaveSummary">📥 保存总结图</view>
+  </view>
+
+  <view class="btn-primary" bindtap="goTarot">再选一次</view>
+  <view class="btn-ghost mt20" bindtap="goHome">返回首页</view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">✦ 仅供娱乐参考 ✦</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+
+  <!-- 隐藏的canvas -->
+  <canvas type="2d" id="summaryCanvas" style="position: fixed; left: -9999px; top: -9999px;"></canvas>
+
+  <!-- 保存图片弹窗 -->
+  <view class="save-modal" wx:if="{{showSaveModal}}" bindtap="closeSaveModal">
+    <view class="save-modal-content" catchtap="">
+      <scroll-view scroll-y class="save-scroll">
+        <image class="save-preview" src="{{saveImg}}" mode="widthFix"></image>
+      </scroll-view>
+      <view class="save-btn" bindtap="saveToAlbum">保存到相册</view>
+      <view class="save-cancel" bindtap="closeSaveModal">取消</view>
+    </view>
+  </view>
+</view>

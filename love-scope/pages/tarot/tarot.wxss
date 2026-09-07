@@ -1,0 +1,234 @@
+/* pages/tarot/tarot.wxss 塔罗抽牌（星夜玻璃态） */
+
+.page {
+  min-height: 100vh;
+  padding: 30rpx 30rpx 60rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  padding: 20rpx 0 36rpx;
+  position: relative;
+}
+
+.header::before {
+  content: '🌙';
+  position: absolute;
+  top: 14rpx;
+  left: 15%;
+  font-size: 32rpx;
+  opacity: 0.5;
+}
+
+.header::after {
+  content: '✨';
+  position: absolute;
+  top: 18rpx;
+  right: 15%;
+  font-size: 28rpx;
+  opacity: 0.5;
+}
+
+/* 维度选择 */
+.category-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.category-option {
+  width: 48%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 215, 0, 0.15);
+  border-radius: 16rpx;
+  padding: 18rpx 10rpx 16rpx;
+  text-align: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+  position: relative;
+  margin-bottom: 16rpx;
+}
+
+.category-option.active {
+  background: rgba(240, 168, 192, 0.18);
+  border-color: rgba(240, 168, 192, 0.5);
+  box-shadow: 0 4rpx 16rpx rgba(240, 168, 192, 0.25);
+}
+
+.category-icon {
+  font-size: 32rpx;
+  margin-bottom: 4rpx;
+}
+
+.category-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.category-check {
+  position: absolute;
+  top: 8rpx;
+  right: 10rpx;
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ffd700, #f0a8c0);
+  color: #fff;
+  font-size: 18rpx;
+  font-weight: 800;
+  border-radius: 50%;
+}
+
+.category-tip {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: rgba(255, 215, 0, 0.6);
+  text-align: center;
+}
+
+/* 问题输入 */
+.question-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1rpx solid rgba(255, 215, 0, 0.2);
+  border-radius: 24rpx;
+  padding: 24rpx 28rpx;
+  font-size: 30rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 10rpx 0 8rpx;
+}
+
+.question-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* 抽牌方式选项（玻璃态） */
+.count-options {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 10rpx;
+}
+
+.count-option {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 215, 0, 0.15);
+  border-radius: 28rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.count-option.active {
+  background: rgba(240, 168, 192, 0.15);
+  border-color: rgba(240, 168, 192, 0.4);
+  box-shadow: 0 6rpx 24rpx rgba(240, 168, 192, 0.2);
+}
+
+.count-num {
+  font-size: 52rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffd700, #f0a8c0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8rpx;
+}
+
+.count-label {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4rpx;
+}
+
+.count-desc {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 洗牌动画区 */
+.draw-area {
+  display: flex;
+  justify-content: center;
+  padding: 50rpx 0 40rpx;
+}
+
+/* 牌背（星夜玻璃态） */
+.card-back {
+  width: 320rpx;
+  height: 460rpx;
+  background: linear-gradient(160deg, rgba(60, 40, 100, 0.8) 0%, rgba(40, 25, 80, 0.9) 50%, rgba(30, 20, 60, 0.95) 100%);
+  border-radius: 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.5), 0 0 30rpx rgba(196, 168, 232, 0.2);
+  border: 2rpx solid rgba(255, 215, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.card-back::before {
+  content: '';
+  position: absolute;
+  top: -40rpx;
+  right: -40rpx;
+  width: 160rpx;
+  height: 160rpx;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.card-back-star {
+  font-size: 60rpx;
+  color: #ffd700;
+  margin-bottom: 20rpx;
+  text-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6);
+}
+
+.card-back-name {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10rpx;
+  text-shadow: 0 2rpx 12rpx rgba(196, 168, 232, 0.5);
+}
+
+.card-back-sub {
+  font-size: 24rpx;
+  color: rgba(255, 215, 0, 0.6);
+  letter-spacing: 2rpx;
+}
+
+/* 洗牌抖动动画 */
+.card-back.shaking {
+  animation: shake 0.4s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(-3deg) translateX(-8rpx); }
+  75% { transform: rotate(3deg) translateX(8rpx); }
+}
+
+.btn-primary {
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  letter-spacing: 6rpx;
+}
+
+.disclaimer {
+  margin-top: 30rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.3);
+}

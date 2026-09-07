@@ -1,0 +1,116 @@
+<!--pages/personal/mbti-test/mbti-test.wxml-->
+<view class="page">
+
+  <!-- 开始界面 -->
+  <view class="start-page" wx:if="{{phase === 'start'}}">
+    <view class="start-icon">🧩</view>
+    <view class="start-title">MBTI 性格测试</view>
+    <view class="start-desc">16道精选题目，约2分钟完成<br/>探索你的性格类型</view>
+    <view class="start-tips">
+      <text class="tip-item">凭第一直觉选择</text>
+      <text class="tip-item">没有对错之分</text>
+      <text class="tip-item">真实作答更准确</text>
+    </view>
+    <view class="start-btn" bindtap="startTest">开始测试</view>
+  </view>
+
+  <!-- 答题界面 -->
+  <view class="test-page" wx:if="{{phase === 'testing'}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <view class="progress-text">{{currentIndex + 1}} / {{questions.length}}</view>
+
+    <view class="question-card">
+      <view class="question-num">第 {{currentIndex + 1}} 题</view>
+      <view class="question-text">{{currentQuestion.question}}</view>
+    </view>
+
+    <view class="options">
+      <view class="option-card" data-value="{{currentQuestion.options[0].value}}" bindtap="selectOption">
+        <view class="option-label">A</view>
+        <view class="option-text">{{currentQuestion.options[0].text}}</view>
+      </view>
+      <view class="option-card" data-value="{{currentQuestion.options[1].value}}" bindtap="selectOption">
+        <view class="option-label">B</view>
+        <view class="option-text">{{currentQuestion.options[1].text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结果界面 -->
+  <view class="result-page" wx:if="{{phase === 'result'}}">
+    <view class="result-header">
+      <image class="cat-image" src="{{catImage}}" mode="aspectFit" wx:if="{{catImage}}"></image>
+      <view class="result-type">{{result.type}}</view>
+      <view class="result-name">{{mbtiInfo.name}}</view>
+      <view class="result-trait">{{mbtiInfo.trait}}</view>
+    </view>
+
+    <view class="result-desc">{{mbtiInfo.detail}}</view>
+
+    <view class="detail-section">
+      <view class="detail-block">
+        <view class="detail-label">天赋优势</view>
+        <view class="detail-text">{{mbtiInfo.strength}}</view>
+      </view>
+      <view class="detail-block">
+        <view class="detail-label">成长挑战</view>
+        <view class="detail-text">{{mbtiInfo.challenge}}</view>
+      </view>
+      <view class="detail-block">
+        <view class="detail-label">成长建议</view>
+        <view class="detail-text">{{mbtiInfo.growth}}</view>
+      </view>
+      <view class="detail-block">
+        <view class="detail-label">感情特质</view>
+        <view class="detail-text">{{mbtiInfo.love}}</view>
+      </view>
+    </view>
+
+    <view class="dim-section">
+      <view class="section-title">四维度分析</view>
+      <view class="dim-item" wx:for="{{dims}}" wx:key="key">
+        <view class="dim-labels">
+          <text class="dim-label {{item.dominant === item.leftLabel ? 'dominant' : ''}}">{{item.leftLabel}} {{item.leftName}}</text>
+          <text class="dim-label {{item.dominant === item.rightLabel ? 'dominant' : ''}}">{{item.rightName}} {{item.rightLabel}}</text>
+        </view>
+        <view class="dim-bar">
+          <view class="dim-left" style="width: {{item.leftPercent}}%;"></view>
+          <view class="dim-right" style="width: {{item.rightPercent}}%;"></view>
+        </view>
+        <view class="dim-percents">
+          <text>{{item.leftPercent}}%</text>
+          <text>{{item.rightPercent}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="result-actions">
+      <view class="action-btn primary" bindtap="generateCard">保存人格卡片</view>
+      <view class="action-btn ghost" bindtap="goPersonal">用此结果做个人解读</view>
+      <view class="action-btn ghost" bindtap="restart">重新测试</view>
+      <view class="action-btn text" bindtap="goHome">返回首页</view>
+    </view>
+  </view>
+
+  <!-- 隐藏的canvas -->
+  <canvas type="2d" id="mbtiCardCanvas" style="position: fixed; left: -9999px; top: -9999px;"></canvas>
+
+  <!-- 保存图片弹窗 -->
+  <view class="save-modal" wx:if="{{showSaveModal}}" bindtap="closeSaveModal">
+    <view class="save-modal-content" catchtap="">
+      <scroll-view scroll-y class="save-scroll">
+        <image class="save-preview" src="{{saveImg}}" mode="widthFix"></image>
+      </scroll-view>
+      <view class="save-btn-action" bindtap="saveToAlbum">保存到相册</view>
+      <view class="save-cancel" bindtap="closeSaveModal">取消</view>
+    </view>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">仅供娱乐参考</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>

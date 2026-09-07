@@ -1,0 +1,137 @@
+<!-- pages/matching/matching.wxml 情感契合度分析 -->
+<view class="page">
+  <view class="header">
+    <view class="section-title">情感契合度分析</view>
+    <view class="section-sub">星座 · 属相 · 出生信息，任意填写一项即可查看契合度</view>
+  </view>
+
+  <!-- 星座 -->
+  <view class="card">
+    <view class="card-title">✨ 星座</view>
+    <view class="card-tip">双方都填 = 缘分配对；只填一方 = 个人年度情感状态</view>
+    <picker mode="selector" range="{{zodiacNames}}" value="{{myZIdx}}" bindchange="onMyZodiacChange">
+      <view class="select-row">
+        <view class="select-label">你的星座</view>
+        <view class="select-right">
+          <text class="select-value {{myZIdx===0 ? 'text-dim' : ''}}">{{zodiacNames[myZIdx]}}</text>
+          <text class="select-date" wx:if="{{myZIdx>0}}">{{zodiacDates[myZIdx]}}</text>
+          <text class="select-arrow">›</text>
+        </view>
+      </view>
+    </picker>
+    <view class="divider"></view>
+    <picker mode="selector" range="{{zodiacNames}}" value="{{taZIdx}}" bindchange="onTaZodiacChange">
+      <view class="select-row">
+        <view class="select-label">TA的星座</view>
+        <view class="select-right">
+          <text class="select-value {{taZIdx===0 ? 'text-dim' : ''}}">{{zodiacNames[taZIdx]}}</text>
+          <text class="select-date" wx:if="{{taZIdx>0}}">{{zodiacDates[taZIdx]}}</text>
+          <text class="select-arrow">›</text>
+        </view>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 属相 -->
+  <view class="card">
+    <view class="card-title">🐾 属相</view>
+    <view class="card-tip">双方都填 = 生肖缘分；只填一方 = 属相年度情感状态</view>
+    <picker mode="selector" range="{{animalNames}}" value="{{myAIdx}}" bindchange="onMyAnimalChange">
+      <view class="select-row">
+        <view class="select-label">你的属相</view>
+        <view class="select-right">
+          <text class="select-value {{myAIdx===0 ? 'text-dim' : ''}}">{{animalNames[myAIdx]}}</text>
+          <text class="select-arrow">›</text>
+        </view>
+      </view>
+    </picker>
+    <view class="divider"></view>
+    <picker mode="selector" range="{{animalNames}}" value="{{taAIdx}}" bindchange="onTaAnimalChange">
+      <view class="select-row">
+        <view class="select-label">TA的属相</view>
+        <view class="select-right">
+          <text class="select-value {{taAIdx===0 ? 'text-dim' : ''}}">{{animalNames[taAIdx]}}</text>
+          <text class="select-arrow">›</text>
+        </view>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 出生信息 -->
+  <view class="card birth-card">
+    <view class="card-title">🎂 出生信息</view>
+    <view class="card-tip">填全出生年+生日+时间+地点，可获得专业性格星图配对（上升星座/行星/相位）</view>
+
+    <view class="birth-section">
+      <view class="birth-person">你的</view>
+      <view class="birth-inputs">
+        <input class="birth-input" type="number" placeholder="出生年 如1995" value="{{myBirthYear}}" bindinput="onMyYearInput" maxlength="4"/>
+        <picker class="birth-picker" mode="selector" range="{{months}}" value="{{myMonthIdx}}" bindchange="onMyMonthPick">
+          <view class="birth-picker-box {{myMonthIdx===0 ? 'ph' : ''}}">{{myMonthIdx===0 ? '月' : months[myMonthIdx]}}</view>
+        </picker>
+        <picker class="birth-picker" mode="selector" range="{{myDays}}" value="{{myDayIdx}}" bindchange="onMyDayPick">
+          <view class="birth-picker-box {{myDayIdx===0 ? 'ph' : ''}}">{{myDayIdx===0 ? '日' : myDays[myDayIdx]}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="birth-section">
+      <view class="birth-person"></view>
+      <view class="birth-inputs">
+        <picker class="birth-picker" mode="time" value="{{myBirthTime}}" bindchange="onMyTimePick">
+          <view class="birth-picker-box {{!myBirthTime ? 'ph' : ''}}">{{myBirthTime || '时间'}}</view>
+        </picker>
+        <input class="birth-input" placeholder="出生城市 如北京" value="{{myCity}}" bindinput="onMyCityInput" maxlength="10"/>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="birth-section">
+      <view class="birth-person">TA的</view>
+      <view class="birth-inputs">
+        <input class="birth-input" type="number" placeholder="出生年 如1996" value="{{taBirthYear}}" bindinput="onTaYearInput" maxlength="4"/>
+        <picker class="birth-picker" mode="selector" range="{{months}}" value="{{taMonthIdx}}" bindchange="onTaMonthPick">
+          <view class="birth-picker-box {{taMonthIdx===0 ? 'ph' : ''}}">{{taMonthIdx===0 ? '月' : months[taMonthIdx]}}</view>
+        </picker>
+        <picker class="birth-picker" mode="selector" range="{{taDays}}" value="{{taDayIdx}}" bindchange="onTaDayPick">
+          <view class="birth-picker-box {{taDayIdx===0 ? 'ph' : ''}}">{{taDayIdx===0 ? '日' : taDays[taDayIdx]}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="birth-section">
+      <view class="birth-person"></view>
+      <view class="birth-inputs">
+        <picker class="birth-picker" mode="time" value="{{taBirthTime}}" bindchange="onTaTimePick">
+          <view class="birth-picker-box {{!taBirthTime ? 'ph' : ''}}">{{taBirthTime || '时间'}}</view>
+        </picker>
+        <input class="birth-input" placeholder="出生城市 如上海" value="{{taCity}}" bindinput="onTaCityInput" maxlength="10"/>
+      </view>
+    </view>
+
+    <view class="birth-auto" wx:if="{{autoHint}}">
+      <text class="birth-auto-text">✨ {{autoHint}}</text>
+    </view>
+  </view>
+
+  <!-- 年份 -->
+  <view class="card">
+    <view class="card-title">📅 查看年份</view>
+    <picker mode="selector" range="{{years}}" value="{{yearIdx}}" bindchange="onYearChange">
+      <view class="select-row">
+        <view class="select-label">年度契合度</view>
+        <view class="select-right">
+          <text class="select-value">{{years[yearIdx]}}</text>
+          <text class="select-arrow">›</text>
+        </view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="btn-primary mt40" bindtap="onStart">开始分析</view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">✦ 仅供娱乐参考 ✦</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>

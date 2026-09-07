@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>WeChat DevTools API Test</h2>
+<div id="result">Loading...</div>
+<script>
+async function test() {
+  const result = document.getElementById('result');
+  try {
+    // Try to open project
+    const openResp = await fetch('http://127.0.0.1:9420/open', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({projectpath: 'C:\\Users\\jd\\Doubao\\chats\\2026-08-29\\new-chat-2\\love-scope'})
+    });
+    const openText = await openResp.text();
+    result.innerHTML += '<br>OPEN: ' + openText;
+    
+    // Wait a bit then try compile
+    await new Promise(r => setTimeout(r, 3000));
+    
+    // Try compile endpoint
+    const compileResp = await fetch('http://127.0.0.1:9420/compile', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({projectpath: 'C:\\Users\\jd\\Doubao\\chats\\2026-08-29\\new-chat-2\\love-scope'})
+    });
+    const compileText = await compileResp.text();
+    result.innerHTML += '<br>COMPILE: ' + compileText;
+  } catch(e) {
+    result.innerHTML += '<br>ERROR: ' + e.message;
+  }
+}
+test();
+</script>
+</body>
+</html>

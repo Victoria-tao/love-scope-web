@@ -1,0 +1,60 @@
+<view class="page">
+  <view class="header">
+    <view class="section-title">✨ 趣味卡牌</view>
+    <view class="section-sub">选一个你好奇的方向，看看卡牌给你的灵感</view>
+  </view>
+
+  <!-- 问题维度 -->
+  <view class="card">
+    <view class="card-title">选择关注方向（可多选）</view>
+    <view class="category-options">
+      <view class="category-option {{item.selected ? 'active' : ''}}" wx:for="{{categories}}" wx:key="key" bindtap="toggleCategory" data-key="{{item.key}}">
+        <view class="category-icon">{{item.icon}}</view>
+        <view class="category-name">{{item.name}}</view>
+        <view class="category-check" wx:if="{{item.selected}}">✓</view>
+      </view>
+    </view>
+    <view class="category-tip">已选 {{selectedCount}} 个方向，将综合解读</view>
+  </view>
+
+  <!-- 问题输入 -->
+  <view class="card">
+    <view class="card-title">默念你的问题</view>
+    <input class="question-input" placeholder="例如：TA对我是什么感觉？" value="{{question}}" bindinput="onQuestionInput" maxlength="40" />
+    <view class="card-tip">* 可留空，凭直觉选牌</view>
+  </view>
+
+  <!-- 选牌方式 -->
+  <view class="card">
+    <view class="card-title">选择选牌方式</view>
+    <view class="count-options">
+      <view class="count-option {{count === 1 ? 'active' : ''}}" bindtap="setCount" data-count="1">
+        <view class="count-num">1</view>
+        <view class="count-label">单张</view>
+        <view class="count-desc">快速灵感</view>
+      </view>
+      <view class="count-option {{count === 3 ? 'active' : ''}}" bindtap="setCount" data-count="3">
+        <view class="count-num">3</view>
+        <view class="count-label">三张</view>
+        <view class="count-desc">过去 · 现在 · 未来</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 洗牌动画区 -->
+  <view class="draw-area">
+    <view class="card-back {{drawing ? 'shaking' : ''}}">
+      <view class="card-back-star">✦</view>
+      <view class="card-back-name">{{drawing ? flipName : '?'}}</view>
+      <view class="card-back-sub">{{drawing ? '洗牌中...' : '默念问题后选牌'}}</view>
+    </view>
+  </view>
+
+  <view class="btn-primary" bindtap="onDraw">{{drawing ? '正在洗牌...' : '开始选牌'}}</view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">✦ 仅供娱乐参考 ✦</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>

@@ -1,0 +1,70 @@
+<!--pages/personal/personal.wxml-->
+<view class="page">
+  <view class="header">
+    <view class="title">个人性格解读</view>
+    <view class="subtitle">MBTI 深度性格分析</view>
+  </view>
+
+  <view class="input-card" wx:if="{{!result}}">
+    <view class="input-item">
+      <view class="input-label">你的MBTI类型</view>
+      <picker mode="selector" range="{{mbtiTypes}}" value="{{mbtiIndex}}" bindchange="onMbtiChange">
+        <view class="picker-value">{{mbtiTypes[mbtiIndex]}}</view>
+      </picker>
+      <view class="mbti-test-link" bindtap="goMbtiTest">不知道自己的MBTI？去测一下</view>
+    </view>
+    <view class="btn-primary" bindtap="onAnalyze">开始解读</view>
+  </view>
+
+  <view class="result-card" wx:if="{{result}}">
+    <view class="result-title">{{result.title}}</view>
+
+    <view class="result-section">
+      <view class="section-label">性格画像</view>
+      <view class="section-text">{{result.personality}}</view>
+    </view>
+
+    <view class="result-section">
+      <view class="section-label">天赋优势</view>
+      <view class="section-text">{{result.strength}}</view>
+    </view>
+
+    <view class="result-section">
+      <view class="section-label">成长挑战</view>
+      <view class="section-text">{{result.challenge}}</view>
+    </view>
+
+    <view class="result-section">
+      <view class="section-label">成长建议</view>
+      <view class="section-text">{{result.advice}}</view>
+    </view>
+
+    <view class="result-section">
+      <view class="section-label">感情特质</view>
+      <view class="section-text">{{result.mbtiLove}}</view>
+    </view>
+
+    <view class="save-btn" bindtap="generateCard">保存总结卡片</view>
+    <view class="btn-ghost" bindtap="goHome">返回首页</view>
+  </view>
+
+  <!-- 隐藏的canvas -->
+  <canvas type="2d" id="cardCanvas" style="position: fixed; left: -9999px; top: -9999px;"></canvas>
+
+  <!-- 保存图片弹窗 -->
+  <view class="save-modal" wx:if="{{showSaveModal}}" bindtap="closeSaveModal">
+    <view class="save-modal-content" catchtap="">
+      <scroll-view scroll-y class="save-scroll">
+        <image class="save-preview" src="{{saveImg}}" mode="widthFix"></image>
+      </scroll-view>
+      <view class="save-btn-action" bindtap="saveToAlbum">保存到相册</view>
+      <view class="save-cancel" bindtap="closeSaveModal">取消</view>
+    </view>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">仅供娱乐参考</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>

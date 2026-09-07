@@ -1,0 +1,114 @@
+<!-- pages/pro/pro.wxml 专业版深度匹配输入 -->
+<view class="page">
+  <view class="pro-header">
+    <image class="pro-header-bg" src="/assets/illustration/home/hero_rose-couple.jpg" mode="aspectFill"></image>
+    <view class="pro-header-overlay"></view>
+    <view class="pro-header-content">
+      <view class="pro-badge">PRO · 深度匹配</view>
+      <view class="pro-title">六维合一 · 读懂你们的相处模式</view>
+      <view class="pro-sub">星座 · 属相 · 出生信息 · 性格维度 · 年度 · 趣味卡牌<br/>填全双方信息，解锁最完整的性格匹配分析</view>
+    </view>
+  </view>
+
+  <!-- 你的信息 -->
+  <view class="person-card">
+    <view class="person-header">
+      <view class="person-avatar my">你</view>
+      <view class="person-title">你的出生信息</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生年份</view>
+      <input class="form-input" type="number" maxlength="4" placeholder="如 1995" value="{{myYear}}" bindinput="onMyYear" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生日期</view>
+      <view class="form-date-group">
+        <picker mode="selector" range="{{months}}" value="{{myMonthIdx}}" bindchange="onMyMonthPick">
+          <view class="form-picker small {{myMonthIdx===0 ? 'ph' : ''}}">{{myMonthIdx===0 ? '月' : months[myMonthIdx]}}</view>
+        </picker>
+        <picker mode="selector" range="{{myDays}}" value="{{myDayIdx}}" bindchange="onMyDayPick">
+          <view class="form-picker small {{myDayIdx===0 ? 'ph' : ''}}">{{myDayIdx===0 ? '日' : myDays[myDayIdx]}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生时间</view>
+      <picker mode="time" value="{{myTime}}" bindchange="onMyTimePick">
+        <view class="form-picker {{!myTime ? 'ph' : ''}}">{{myTime || '选择时间'}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生城市</view>
+      <input class="form-input" placeholder="如 北京" value="{{myCity}}" bindinput="onMyCityInput" />
+    </view>
+    <view class="auto-tip" wx:if="{{myZodiacName}}">已自动识别：{{myZodiacName}} · 属{{myAnimalName}}</view>
+  </view>
+
+  <!-- TA的信息 -->
+  <view class="person-card">
+    <view class="person-header">
+      <view class="person-avatar ta">TA</view>
+      <view class="person-title">TA的出生信息</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生年份</view>
+      <input class="form-input" type="number" maxlength="4" placeholder="如 1997" value="{{taYear}}" bindinput="onTaYear" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生日期</view>
+      <view class="form-date-group">
+        <picker mode="selector" range="{{months}}" value="{{taMonthIdx}}" bindchange="onTaMonthPick">
+          <view class="form-picker small {{taMonthIdx===0 ? 'ph' : ''}}">{{taMonthIdx===0 ? '月' : months[taMonthIdx]}}</view>
+        </picker>
+        <picker mode="selector" range="{{taDays}}" value="{{taDayIdx}}" bindchange="onTaDayPick">
+          <view class="form-picker small {{taDayIdx===0 ? 'ph' : ''}}">{{taDayIdx===0 ? '日' : taDays[taDayIdx]}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生时间</view>
+      <picker mode="time" value="{{taTime}}" bindchange="onTaTimePick">
+        <view class="form-picker {{!taTime ? 'ph' : ''}}">{{taTime || '选择时间'}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <view class="form-label">出生城市</view>
+      <input class="form-input" placeholder="如 上海" value="{{taCity}}" bindinput="onTaCityInput" />
+    </view>
+    <view class="auto-tip" wx:if="{{taZodiacName}}">已自动识别：{{taZodiacName}} · 属{{taAnimalName}}</view>
+  </view>
+
+  <!-- 年度 -->
+  <view class="person-card">
+    <view class="person-header">
+      <view class="person-avatar year">📅</view>
+      <view class="person-title">选择年份</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">目标年份</view>
+      <picker mode="selector" range="{{years}}" value="{{yearIdx}}" bindchange="onYear">
+        <view class="form-picker">{{years[yearIdx]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 就绪提示 -->
+  <view class="ready-hint" wx:if="{{readyLevel > 0}}">
+    <text class="ready-icon">{{readyLevel >= 3 ? '✨' : '📝'}}</text>
+    <text class="ready-text">{{readyText}}</text>
+  </view>
+
+  <!-- 提交 -->
+  <view class="submit-area">
+    <view class="btn-pro {{canSubmit ? '' : 'disabled'}}" bindtap="onStart">
+      <text class="btn-icon">🔮</text> 开始深度匹配
+    </view>
+    <view class="submit-note">填全双方信息可解锁全部六维；信息不全时按已有维度分析</view>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">✦ 仅供娱乐参考 ✦</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>

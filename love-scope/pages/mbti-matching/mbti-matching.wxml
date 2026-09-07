@@ -1,0 +1,56 @@
+<!-- pages/mbti-matching/mbti-matching.wxml 性格速配输入 -->
+<view class="page">
+  <view class="page-header">
+    <view class="header-badge">✦ 性格速配 ✦</view>
+    <view class="header-title">MBTI 双人性格匹配</view>
+    <view class="header-sub">输入双方的 MBTI 类型，看看你们的相处模式</view>
+  </view>
+
+  <!-- 你的信息 -->
+  <view class="person-card">
+    <view class="person-header">
+      <view class="person-avatar my">你</view>
+      <view class="person-title">你的性格类型</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">MBTI类型</view>
+      <picker mode="selector" range="{{mbtiList}}" value="{{myMbtiIdx}}" bindchange="onMyMbti">
+        <view class="form-picker">{{myMbti || '请选择'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- TA的信息 -->
+  <view class="person-card">
+    <view class="person-header">
+      <view class="person-avatar ta">TA</view>
+      <view class="person-title">TA的性格类型</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">MBTI类型</view>
+      <picker mode="selector" range="{{mbtiList}}" value="{{taMbtiIdx}}" bindchange="onTaMbti">
+        <view class="form-picker">{{taMbti || '请选择'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 就绪提示 -->
+  <view class="ready-hint" wx:if="{{readyText}}">
+    <text class="ready-icon">✨</text>
+    <text class="ready-text">{{readyText}}</text>
+  </view>
+
+  <!-- 提交 -->
+  <view class="submit-area">
+    <view class="btn-primary {{canSubmit ? '' : 'disabled'}}" bindtap="onStart">
+      开始性格匹配
+    </view>
+    <view class="submit-note">还不知道自己的 MBTI？先去测一下，再回来速配</view>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-entertain">✦ 仅供娱乐参考 ✦</view>
+    <view class="footer-copyright">@copyright 2026 Victoria_Tao</view>
+  </view>
+</view>
