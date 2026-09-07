@@ -1,0 +1,384 @@
+/* ===== 性格契合度 · 网页版 全局样式 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: linear-gradient(180deg, #0d0d2b 0%, #1a1a4e 50%, #0d0d2b 100%);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#app { max-width: 640px; margin: 0 auto; min-height: 100vh; padding-bottom: 40px; }
+
+.page { padding: 20px 16px 30px; }
+
+/* ===== 顶部导航栏 ===== */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center;
+  background: rgba(13,13,43,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,215,0,0.12);
+  padding: 12px 14px;
+}
+.navbar .nav-back { font-size: 22px; color: #ffd700; cursor: pointer; padding: 4px 10px 4px 0; }
+.navbar .nav-title { flex: 1; text-align: center; font-size: 17px; font-weight: 600; color: #f5f0ff; letter-spacing: 1px; }
+.navbar .nav-home { font-size: 13px; color: #c4a8e8; cursor: pointer; padding: 4px 0 4px 10px; white-space: nowrap; }
+
+/* ===== Hero 首页 ===== */
+.hero { position: relative; height: 320px; overflow: hidden; border-radius: 0 0 30px 30px; }
+.hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,13,43,0.15) 0%, rgba(13,13,43,0.55) 70%, #0d0d2b 100%); }
+.hero .hero-content { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; }
+.hero .hero-badge { display: inline-block; font-size: 14px; color: #ffd700; letter-spacing: 3px; margin-bottom: 10px; }
+.hero .hero-title { font-size: 40px; font-weight: 800; color: #fff; letter-spacing: 6px; text-shadow: 0 2px 16px rgba(0,0,0,0.5); }
+.hero .hero-sub { margin-top: 10px; font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+
+/* ===== 通用卡片 ===== */
+.card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.14);
+  border-radius: 18px;
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(8px);
+}
+.card-title { font-size: 17px; font-weight: 700; color: #ffd700; margin-bottom: 8px; }
+.card-tip { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 12px; line-height: 1.6; }
+
+/* ===== 入口卡片（首页） ===== */
+.entries { padding: 18px 16px 0; }
+.entry-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 20px 18px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s;
+}
+.entry-card:active { transform: scale(0.98); }
+.entry-card .entry-icon { font-size: 34px; margin-bottom: 8px; }
+.entry-card .entry-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.entry-card .entry-desc { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.entry-card .entry-arrow { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; color: rgba(255,255,255,0.6); }
+.entry-pink { background: linear-gradient(135deg, rgba(240,168,192,0.35), rgba(240,168,192,0.12)); border: 1px solid rgba(240,168,192,0.35); }
+.entry-gold { background: linear-gradient(135deg, rgba(255,215,0,0.30), rgba(255,215,0,0.10)); border: 1px solid rgba(255,215,0,0.35); }
+.entry-purple { background: linear-gradient(135deg, rgba(196,168,232,0.35), rgba(196,168,232,0.12)); border: 1px solid rgba(196,168,232,0.35); }
+.entry-green { background: linear-gradient(135deg, rgba(139,195,139,0.32), rgba(139,195,139,0.10)); border: 1px solid rgba(139,195,139,0.35); }
+.entry-blue { background: linear-gradient(135deg, rgba(139,157,195,0.35), rgba(139,157,195,0.12)); border: 1px solid rgba(139,157,195,0.35); }
+.entry-orange { background: linear-gradient(135deg, rgba(232,149,106,0.35), rgba(232,149,106,0.12)); border: 1px solid rgba(232,149,106,0.35); }
+
+.mini-entries { display: flex; gap: 10px; padding: 0 16px 4px; flex-wrap: wrap; }
+.mini-entry {
+  flex: 1 1 120px; min-width: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.14);
+  border-radius: 16px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.mini-entry:active { transform: scale(0.97); }
+.mini-entry .mini-icon { font-size: 26px; margin-bottom: 4px; }
+.mini-entry .mini-name { font-size: 14px; font-weight: 600; color: #fff; }
+.mini-entry .mini-desc { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* ===== 表单 ===== */
+.select-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 2px; cursor: pointer;
+}
+.select-row .select-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+.select-row .select-right { display: flex; align-items: center; gap: 8px; }
+.select-row .select-value { font-size: 15px; color: #fff; }
+.select-row .select-value.text-dim { color: rgba(255,255,255,0.35); }
+.select-row .select-date { font-size: 11px; color: #ffd700; }
+.select-row .select-arrow { font-size: 20px; color: rgba(255,255,255,0.4); }
+.divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0 2px; }
+
+/* 下拉选择器 */
+.custom-select { position: relative; }
+.custom-select select {
+  appearance: none; -webkit-appearance: none;
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 12px;
+  color: #fff; font-size: 15px;
+  padding: 12px 34px 12px 14px;
+  cursor: pointer;
+  outline: none;
+}
+.custom-select select option { background: #1a1a4e; color: #fff; }
+.custom-select::after {
+  content: '›';
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-55%) rotate(90deg);
+  color: #ffd700; font-size: 18px; pointer-events: none;
+}
+
+/* 出生信息输入区 */
+.birth-section { display: flex; align-items: center; margin-bottom: 10px; }
+.birth-person { width: 44px; font-size: 14px; color: #f0a8c0; flex-shrink: 0; }
+.birth-inputs { flex: 1; display: flex; gap: 8px; flex-wrap: wrap; }
+.birth-input {
+  flex: 1 1 90px; min-width: 0;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 10px;
+  color: #fff; font-size: 14px;
+  padding: 11px 12px;
+  outline: none;
+}
+.birth-input::placeholder { color: rgba(255,255,255,0.4); }
+.birth-picker { flex: 1 1 70px; min-width: 0; }
+.birth-picker-box {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 10px;
+  color: #fff; font-size: 14px;
+  padding: 11px 12px;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.birth-picker-box.ph { color: rgba(255,255,255,0.4); }
+.birth-auto { margin-top: 8px; padding: 8px 12px; background: rgba(255,215,0,0.08); border-radius: 10px; }
+.birth-auto-text { font-size: 12px; color: #ffd700; }
+
+/* 按钮 */
+.btn-primary {
+  display: block; width: 100%;
+  background: linear-gradient(135deg, #ffd700, #f0a8c0);
+  color: #1a1a4e; font-size: 17px; font-weight: 700;
+  border: none; border-radius: 30px;
+  padding: 16px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  box-shadow: 0 6px 20px rgba(255,215,0,0.25);
+}
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.5; }
+.mt40 { margin-top: 24px; }
+.btn-secondary {
+  display: block; width: 100%;
+  background: rgba(255,255,255,0.08);
+  color: #c4a8e8; font-size: 15px;
+  border: 1px solid rgba(196,168,232,0.3);
+  border-radius: 30px;
+  padding: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+.btn-secondary:active { transform: scale(0.98); }
+
+/* ===== 结果页 ===== */
+.result-hero { border-radius: 20px; overflow: hidden; margin-bottom: 16px; position: relative; }
+.result-hero img { width: 100%; display: block; }
+/* 情感结果页顶部背景图：细长横条 + 截取中下方 + 渐隐融合背景 */
+.result-hero-crop {
+  height: 0;
+  padding-bottom: 31%;
+  margin-bottom: 16px;
+  border-radius: 20px;
+}
+.result-hero-crop img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 70%; /* 截取原图中下部分 */
+  display: block;
+}
+.result-hero-crop::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(13,13,43,0) 0%, rgba(13,13,43,0.35) 55%, rgba(13,13,43,0.92) 100%);
+  pointer-events: none;
+}
+.result-score-block { text-align: center; padding: 24px 16px; }
+.result-score-block { position: relative; z-index: 1; }
+.result-score { font-size: 84px; font-weight: 800; background: linear-gradient(180deg, #ffd700, #f0c060, #f0a8c0); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; }
+.result-score-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; letter-spacing: 3px; }
+.result-level { display: inline-block; margin-top: 10px; font-size: 15px; color: #c4a8e8; border: 1px solid rgba(196,168,232,0.4); border-radius: 20px; padding: 5px 16px; }
+
+.section { margin: 22px 0 12px; }
+.section-title { font-size: 17px; font-weight: 700; color: #ffd700; text-align: center; letter-spacing: 2px; }
+.section-sub { font-size: 12px; color: rgba(255,255,255,0.55); text-align: center; margin-top: 4px; }
+
+/* 雷达图 */
+.radar-wrap { display: flex; justify-content: center; padding: 10px 0; }
+.radar-wrap canvas { max-width: 100%; }
+
+/* 维度条 */
+.dim-bar-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 2px; }
+.dim-bar-row .dim-name { font-size: 14px; color: rgba(255,255,255,0.8); width: 96px; }
+.dim-bar-row .dim-bar { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin: 0 10px; overflow: hidden; }
+.dim-bar-row .dim-bar-inner { height: 100%; border-radius: 4px; }
+.dim-bar-row .dim-score { font-size: 13px; color: #ffd700; width: 46px; text-align: right; }
+
+/* 文案卡片 */
+.text-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.14);
+  border-radius: 14px;
+  padding: 14px 14px;
+  margin-bottom: 12px;
+}
+.text-card .tc-title { font-size: 14px; font-weight: 700; color: #ffd700; margin-bottom: 6px; }
+.text-card .tc-content { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.8; white-space: pre-wrap; }
+.text-card .tc-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.text-card .tag { font-size: 11px; color: #f0a8c0; background: rgba(240,168,192,0.12); border-radius: 10px; padding: 3px 9px; }
+
+/* ===== 卡牌 ===== */
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.cat-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.14);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cat-card .cat-icon { font-size: 26px; margin-bottom: 4px; }
+.cat-card .cat-name { font-size: 13px; color: rgba(255,255,255,0.8); }
+.cat-card.selected { border-color: #ffd700; background: rgba(255,215,0,0.12); box-shadow: 0 0 12px rgba(255,215,0,0.15); }
+
+/* 抽牌展示 */
+.tarot-cards { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+.tarot-card-item { width: 130px; text-align: center; }
+.tarot-card-item .tc-img { width: 130px; height: 220px; object-fit: cover; border-radius: 10px; border: 2px solid #ffd700; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+.tarot-card-item .tc-name { margin-top: 8px; font-size: 13px; color: #fff; }
+.tarot-card-item .tc-pos { font-size: 11px; color: #f0a8c0; margin-top: 2px; }
+.tarot-card-item.reversed .tc-img { transform: rotate(180deg); }
+
+/* 洗牌动画 */
+.shuffle-box {
+  display: flex; align-items: center; justify-content: center;
+  height: 220px; font-size: 20px; color: #ffd700; letter-spacing: 2px;
+}
+
+/* ===== 日历 ===== */
+.calendar-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,215,0,0.14); border-radius: 18px; padding: 16px 12px; margin-bottom: 14px; }
+.calendar-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.calendar-nav .nav-btn { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.08); border-radius: 10px; color: #ffd700; font-size: 14px; cursor: pointer; }
+.calendar-nav .nav-btn.today { width: auto; padding: 0 12px; font-size: 13px; }
+.calendar-title { font-size: 15px; color: #fff; font-weight: 600; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-weekday { text-align: center; font-size: 11px; color: rgba(255,255,255,0.45); padding: 6px 0; }
+.cal-day {
+  text-align: center; font-size: 13px; color: rgba(255,255,255,0.75);
+  padding: 8px 0; border-radius: 8px; cursor: pointer; position: relative;
+}
+.cal-day.empty { cursor: default; }
+.cal-day.today { color: #ffd700; font-weight: 700; }
+.cal-day.selected { background: rgba(255,215,0,0.2); color: #fff; font-weight: 700; }
+
+/* 运势分数 */
+.fortune-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 2px; }
+.fortune-row .f-name { font-size: 15px; color: #fff; }
+.fortune-row .f-score { font-size: 22px; font-weight: 800; }
+.fortune-row .f-level { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+/* ===== 底部版权 ===== */
+.page-footer { text-align: center; padding: 30px 0 10px; }
+.footer-line { width: 60%; height: 1px; background: rgba(255,215,0,0.18); margin: 0 auto 14px; }
+.footer-entertain { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 2px; margin-bottom: 8px; }
+.footer-copyright { font-size: 12px; color: rgba(255,215,0,0.35); letter-spacing: 1px; }
+
+/* ===== 弹窗（保存卡片） ===== */
+.modal-mask { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; }
+.modal-box { width: 88%; max-width: 520px; max-height: 82vh; overflow-y: auto; background: #1a1a4e; border: 1px solid rgba(255,215,0,0.2); border-radius: 18px; padding: 20px; }
+.modal-box img { width: 100%; display: block; border-radius: 12px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 14px; }
+.modal-actions .mbtn { flex: 1; text-align: center; padding: 12px; border-radius: 24px; font-size: 15px; cursor: pointer; border: none; }
+.modal-actions .mbtn.save { background: linear-gradient(135deg, #ffd700, #f0a8c0); color: #1a1a4e; font-weight: 700; }
+.modal-actions .mbtn.close { background: rgba(255,255,255,0.1); color: #fff; }
+
+/* toast */
+.toast {
+  position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%);
+  background: rgba(20,20,50,0.95); color: #fff; font-size: 14px;
+  padding: 12px 20px; border-radius: 12px; z-index: 300;
+  border: 1px solid rgba(255,215,0,0.3);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  max-width: 80%;
+}
+.toast.show { opacity: 1; }
+
+/* 隐藏 canvas 用（绘制分享卡） */
+.hidden-canvas { position: fixed; left: -9999px; top: 0; }
+
+/* 加载提示 */
+.loading { text-align: center; padding: 40px 0; color: #ffd700; font-size: 15px; letter-spacing: 2px; }
+
+/* MBTI 测试 */
+.mbti-q { padding: 6px 2px; }
+.mbti-q .q-text { font-size: 18px; font-weight: 600; color: #fff; line-height: 1.6; margin-bottom: 18px; }
+.mbti-opt {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 14px;
+  padding: 16px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px; color: rgba(255,255,255,0.9);
+  line-height: 1.5;
+}
+.mbti-opt:active { background: rgba(255,215,0,0.12); border-color: #ffd700; }
+.progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin: 14px 0; }
+.progress-inner { height: 100%; background: linear-gradient(90deg, #ffd700, #f0a8c0); border-radius: 3px; transition: width 0.3s; }
+.progress-text { font-size: 12px; color: rgba(255,255,255,0.6); text-align: right; }
+
+/* 人格猫咪 */
+.cat-avatar { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #ffd700; margin: 10px auto; display: block; }
+
+/* 维度比例条（MBTI结果） */
+.dim-balance { margin: 10px 0; }
+.dim-balance .db-name { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
+.dim-balance .db-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; }
+.dim-balance .db-left { background: #ffd700; }
+.dim-balance .db-right { background: #f0a8c0; }
+.dim-balance .db-pct { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; }
+
+/* 分享卡预览区 */
+.share-card-hint { font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; margin-top: 10px; }
+
+/* ===== 按钮行（MBTI结果页双按钮） ===== */
+.btn-row { display: flex; gap: 10px; margin-top: 12px; }
+.btn-row .btn-secondary { flex: 1; margin-top: 0; }
+
+/* ===== MBTI 测试选项 ===== */
+.option-card {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 14px;
+  padding: 14px 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.option-card:active { background: rgba(255,215,0,0.12); border-color: #ffd700; }
+.option-card .option-letter {
+  flex-shrink: 0; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,215,0,0.15); color: #ffd700;
+  border-radius: 50%; font-weight: 700; font-size: 14px;
+}
+.option-card .option-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+
+/* ===== MBTI 维度倾向条 ===== */
+.dim-pair { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.dim-pair .dp-side { font-size: 12px; color: rgba(255,255,255,0.7); width: 70px; flex-shrink: 0; }
+.dim-pair .dp-side.right { text-align: right; color: #f0a8c0; }
+.dim-pair .dp-bar { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.dim-pair .dp-bar-inner { height: 100%; background: #ffd700; border-radius: 4px; }
+.dim-pair .dp-bar-inner.right { background: #f0a8c0; margin-left: auto; }
